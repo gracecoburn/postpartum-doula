@@ -1,11 +1,37 @@
 // Contact Form Handler
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navPanel = document.querySelector('.nav-panel');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             handleContactFormSubmit(this);
+        });
+    }
+
+    if (menuToggle && navPanel) {
+        menuToggle.addEventListener('click', function() {
+            const isOpen = navPanel.classList.toggle('open');
+            menuToggle.classList.toggle('open', isOpen);
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        navPanel.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                navPanel.classList.remove('open');
+                menuToggle.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!navPanel.contains(event.target) && !menuToggle.contains(event.target)) {
+                navPanel.classList.remove('open');
+                menuToggle.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
         });
     }
 });

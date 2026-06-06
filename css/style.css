@@ -1,10 +1,12 @@
 :root {
-    --primary-color: #6b4e9e;
-    --secondary-color: #f5a5a5;
-    --text-color: #333;
-    --light-bg: #f9f7f4;
+    --primary-color: #5b8f75;
+    --primary-dark: #3f6d58;
+    --secondary-color: #e9b5b5;
+    --secondary-deep: #d08c8c;
+    --text-color: #33443d;
+    --light-bg: #5b8f751a;
     --white: #ffffff;
-    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow: 0 3px 10px rgba(55, 78, 66, 0.12);
 }
 
 * {
@@ -28,49 +30,93 @@ body {
 
 /* Navigation */
 .navbar {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 1rem 0;
+    background: transparent;
+    color: var(--text-color);
+    padding: 0.75rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: var(--shadow);
 }
 
 .navbar .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    position: relative;
 }
 
-.nav-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
+.minimalist-nav .menu-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid rgba(91, 143, 117, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--shadow);
+    cursor: pointer;
 }
 
-.nav-links {
+.minimalist-nav .menu-toggle span {
+    display: block;
+    width: 1.1rem;
+    height: 2px;
+    border-radius: 999px;
+    background-color: var(--primary-dark);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.minimalist-nav .menu-toggle.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.minimalist-nav .menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.minimalist-nav .menu-toggle.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+.nav-panel {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 20px;
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 240px;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid rgba(91, 143, 117, 0.18);
+    border-radius: 16px;
+    box-shadow: 0 18px 30px rgba(43, 59, 51, 0.14);
+}
+
+.nav-panel.open {
     display: flex;
-    list-style: none;
-    gap: 2rem;
 }
 
-.nav-links a {
-    color: var(--white);
+.nav-panel a {
+    color: var(--text-color);
     text-decoration: none;
-    transition: color 0.3s ease;
-    border-bottom: 2px solid transparent;
-    padding-bottom: 0.25rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 10px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-    color: var(--secondary-color);
-    border-bottom-color: var(--secondary-color);
+.nav-panel a:hover,
+.nav-panel a.active {
+    color: var(--primary-dark);
+    background-color: var(--light-bg);
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #8b6db8 100%);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #7da58e 45%, #c99aa0 100%);
     color: var(--white);
     padding: 6rem 2rem;
     text-align: center;
@@ -90,7 +136,7 @@ body {
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #8b6db8 100%);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #7da58e 45%, #c99aa0 100%);
     color: var(--white);
     padding: 3rem 2rem;
     text-align: center;
@@ -124,7 +170,7 @@ body {
 
 .cta-button:hover,
 .submit-button:hover {
-    background-color: #e88f8f;
+    background-color: var(--secondary-deep);
     transform: translateY(-2px);
 }
 
@@ -158,7 +204,7 @@ body {
 
 .service-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 18px rgba(64, 92, 79, 0.16);
 }
 
 .service-card h3 {
@@ -266,7 +312,7 @@ body {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(107, 78, 158, 0.1);
+    box-shadow: 0 0 0 3px rgba(91, 143, 117, 0.12);
 }
 
 .submit-button {
